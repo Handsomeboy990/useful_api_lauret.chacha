@@ -3,9 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Module;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -46,4 +47,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function setModules()
+	{
+        $modules = Module::select('id')->get();
+
+        foreach($modules as $module) {
+
+            UserModule::create([
+
+                'user_id' => $this->id,
+                'module_id' => $module->id,
+                'active' => false
+            ]);
+        }
+	}
 }

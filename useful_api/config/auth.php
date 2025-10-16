@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'sanctum' => [ // Sanctum uses its own 'sanctum' guard
+            'driver' => 'sanctum',
+            'provider' => 'users',
+        ],
     ],
 
     /*

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Module;
+use App\Models\UserModule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ModuleController extends Controller
 {
@@ -13,9 +15,15 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        //
-        $modules = Module::all();
-        return $modules;
+         $module = Module::all();
+
+/*         $module = UserModule::where('user_id', '=', Auth::user()->id)
+            ->where('active', '=', true)
+            ->join('modules', 'module_id', '=', 'modules.id')
+            ->join('users', 'user_id', '=', 'users.id')
+            ->select('module_id AS id', 'modules.name', 'modules.description')
+            ->get(); */
+        return $module;
     }
 
     /**

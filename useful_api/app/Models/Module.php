@@ -36,4 +36,10 @@ class Module extends Model
 		'name',
 		'description'
 	];
+
+    public function users()
+	{
+		return $this->belongsToMany(User::class, 'user_modules')
+					->withPivot('id', 'active');
+	}
 }

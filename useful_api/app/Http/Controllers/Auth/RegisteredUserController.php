@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-
+        $user->setModules();
         return response()->json($user, 201);
     }
 }
