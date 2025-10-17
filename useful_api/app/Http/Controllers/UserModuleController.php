@@ -39,11 +39,11 @@ class UserModuleController extends Controller
     /**
      * Activate the specified resource.
      */
-    public function activate(Module $module_id)
+    public function activate(Request $request)
     {
         //
 
-        $module = Module::find($module_id);
+        $module = Module::find($request->id);
         $userId = Auth::user()->id;
 
         if(!$module) {
@@ -53,11 +53,11 @@ class UserModuleController extends Controller
         UserModule::updateOrCreate(
             [
                 'user_id' => $userId,
-                'module_id' => $module_id
+                'module_id' => $request->id
             ],
             [
                 'user_id' => $userId,
-                'module_id' => $module_id,
+                'module_id' => $request->id,
                 'active' => true
             ]
         );
@@ -68,10 +68,10 @@ class UserModuleController extends Controller
     /**
      * Desactivate the specified resource.
      */
-    public function desactivate(Module $module_id)
+    public function desactivate(Request $request)
     {
         //
-        $module = Module::find($module_id);
+        $module = Module::find($request->id);
         $userId = Auth::user()->id;
 
         if(!$module) {
@@ -81,11 +81,11 @@ class UserModuleController extends Controller
         UserModule::updateOrCreate(
             [
                 'user_id' => $userId,
-                'module_id' => $module_id
+                'module_id' => $request->id
             ],
             [
                 'user_id' => $userId,
-                'module_id' => $module_id,
+                'module_id' => $request->id,
                 'active' => false
             ]
         );

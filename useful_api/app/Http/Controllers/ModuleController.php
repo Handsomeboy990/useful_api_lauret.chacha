@@ -15,14 +15,14 @@ class ModuleController extends Controller
      */
     public function index()
     {
-         $module = Module::all();
+        //  $module = Module::all();
 
-/*         $module = UserModule::where('user_id', '=', Auth::user()->id)
+         $module = UserModule::where('user_id', '=', Auth::user()->id)
             ->where('active', '=', true)
             ->join('modules', 'module_id', '=', 'modules.id')
             ->join('users', 'user_id', '=', 'users.id')
             ->select('module_id AS id', 'modules.name', 'modules.description')
-            ->get(); */
+            ->get(); 
         return $module;
     }
 
